@@ -1,0 +1,21 @@
+name: Custom Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      runs-on:
+        description: 'Select the operating system'
+        required: true
+        default: 'ubuntu-latest'
+        options:
+          ubuntu-latest: 'Ubuntu'
+          windows-latest: 'Windows'
+          macOS-latest: 'macOS'
+
+jobs:
+  build:
+    runs-on: ${{ github.event.inputs.runs-on }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
